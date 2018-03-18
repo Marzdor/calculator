@@ -10458,10 +10458,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 "use strict";
 
 
-var _Calc = __webpack_require__(3);
-
-var _Calc2 = _interopRequireDefault(_Calc);
-
 var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
@@ -10469,62 +10465,35 @@ var _jquery2 = _interopRequireDefault(_jquery);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _jquery2.default)(document).ready(function () {
-  var buttons = ["CE", "C", "BACK", "/", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "+/-", "0", ".", "="];
+  var buttons = ["CLEAR", "BACK", "/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", "0", ".", "="];
   for (var i = 0; i < buttons.length; i++) {
-    var $btn = (0, _jquery2.default)("<button>").attr("id", buttons[i]).addClass("calculator_btn").text(buttons[i]);
+    var $btn = (0, _jquery2.default)("<button>").attr("id", "calculator--" + buttons[i]).addClass("calculator_btn").text(buttons[i]);
     (0, _jquery2.default)(".calculator_btnArea").append($btn);
     (0, _jquery2.default)($btn).on("click", readButton);
   }
 });
 
 function readButton() {
-  var btn = (0, _jquery2.default)(this).attr("id");
+  var btn = (0, _jquery2.default)(this).text();
   var displayText = (0, _jquery2.default)(".calculator_display").text();
-  var total = 0;
 
-  if (/[0-9]/.test(btn)) {
-    displayText += btn;
-    (0, _jquery2.default)(".calculator_display").text(displayText);
-  } else {
-    switch (btn) {
-      case "CE":
-      case "C":
-        (0, _jquery2.default)(".calculator_display").empty();
-        break;
-      case "BACK":
-        displayText = displayText.slice(0, -1);
-        (0, _jquery2.default)(".calculator_display").text(displayText);
-        break;
-      case "+":
-        total = _Calc2.default.add(displayText, total);
-        console.log(total);
-        (0, _jquery2.default)(".calculator_display").empty();
-        break;
-      case "=":
-        (0, _jquery2.default)(".calculator_display").text(total);
-        total = 0;
-        break;
-    }
+  switch (btn) {
+    case "=":
+      (0, _jquery2.default)(".calculator_display").text(eval(displayText));
+      break;
+    case "CLEAR":
+      (0, _jquery2.default)(".calculator_display").empty();
+      break;
+    case "BACK":
+      displayText = displayText.slice(0, -1);
+      (0, _jquery2.default)(".calculator_display").text(displayText);
+      break;
+    default:
+      displayText += btn;
+      (0, _jquery2.default)(".calculator_display").text(displayText);
+      break;
   }
 }
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var Calc = {
-  add: function add(a, b) {
-    return a + b;
-  }
-};
-
-exports.default = Calc;
 
 /***/ })
 /******/ ]);

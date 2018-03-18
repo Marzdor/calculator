@@ -379,3 +379,11 @@ a {
     height: 50px;
     margin: 0.5%;
   }
+
+#calculator--CLEAR {
+    width: 49%;
+  }
+
+#calculator--0 {
+    width: 49%;
+  }

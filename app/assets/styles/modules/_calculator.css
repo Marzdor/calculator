@@ -22,3 +22,13 @@
     margin: 0.5%;
   }
 }
+
+#calculator {
+  &--CLEAR {
+    width: 49%;
+  }
+
+  &--0 {
+    width: 49%;
+  }
+}
