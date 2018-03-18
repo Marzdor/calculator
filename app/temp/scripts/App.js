@@ -10465,33 +10465,38 @@ var _jquery2 = _interopRequireDefault(_jquery);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _jquery2.default)(document).ready(function () {
-  var buttons = ["CLEAR", "BACK", "/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", "0", ".", "="];
+  var buttons = ["CLEAR", "BACK", "/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", "0", ".", "EQUAL"];
   for (var i = 0; i < buttons.length; i++) {
     var $btn = (0, _jquery2.default)("<button>").attr("id", "calculator--" + buttons[i]).addClass("calculator_btn").text(buttons[i]);
     (0, _jquery2.default)(".calculator_btnArea").append($btn);
     (0, _jquery2.default)($btn).on("click", readButton);
   }
+  (0, _jquery2.default)(".calculator_display").text("");
 });
 
 function readButton() {
   var btn = (0, _jquery2.default)(this).text();
   var displayText = (0, _jquery2.default)(".calculator_display").text();
 
-  switch (btn) {
-    case "=":
-      (0, _jquery2.default)(".calculator_display").text(eval(displayText));
-      break;
-    case "CLEAR":
-      (0, _jquery2.default)(".calculator_display").empty();
-      break;
-    case "BACK":
-      displayText = displayText.slice(0, -1);
-      (0, _jquery2.default)(".calculator_display").text(displayText);
-      break;
-    default:
-      displayText += btn;
-      (0, _jquery2.default)(".calculator_display").text(displayText);
-      break;
+  if (displayText.length > 23) {
+    (0, _jquery2.default)(".calculator_display").text("Digit Length Error");
+  } else {
+    switch (btn) {
+      case "EQUAL":
+        (0, _jquery2.default)(".calculator_display").text(eval(displayText));
+        break;
+      case "CLEAR":
+        (0, _jquery2.default)(".calculator_display").empty();
+        break;
+      case "BACK":
+        displayText = displayText.slice(0, -1);
+        (0, _jquery2.default)(".calculator_display").text(displayText);
+        break;
+      default:
+        displayText += btn;
+        (0, _jquery2.default)(".calculator_display").text(displayText);
+        break;
+    }
   }
 }
 
